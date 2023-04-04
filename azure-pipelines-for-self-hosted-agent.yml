@@ -58,6 +58,11 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       displayName: 'myStep 5 - Upload package'
       artifact: drop
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
@@ -67,4 +72,5 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'azure-cicd-project'
         SlotName: 'production'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/*.zip'
+        AdditionalArguments: 
