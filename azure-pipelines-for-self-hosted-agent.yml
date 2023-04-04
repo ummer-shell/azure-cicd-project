@@ -34,20 +34,20 @@ stages:
         python3.7 -m pip install setup
         python3.7 -m pip install -r requirements.txt
       workingDirectory: $(projectRoot)
-      displayName: 'myStep 1'
+      displayName: 'Step 1 - Install Requirements'
     - script: |
         export PATH=$HOME/.local/bin:$PATH
         make install
       workingDirectory: $(projectRoot)
-      displayName: 'myStep 2'
+      displayName: 'Step 2 - make install'
     - script: |
         export PATH=$HOME/.local/bin:$PATH
         make install
         make lint
       workingDirectory: $(projectRoot)
-      displayName:  'myStep 3 - Run lint tests'
+      displayName:  'Step 3 - Run lint tests'
     - task: ArchiveFiles@2
-      displayName: 'myStep 4 - Archive files'
+      displayName: 'Step 4 - Archive files'
       inputs:
         rootFolderOrFile: '$(projectRoot)'
         includeRootFolder: false
@@ -56,14 +56,10 @@ stages:
         replaceExistingArchive: true
 
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-      displayName: 'myStep 5 - Upload package'
+      displayName: 'Step 5 - Upload package'
       artifact: drop
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
     - task: AzureRmWebAppDeployment@4
+      displayName: 'Step 6 - Deploy'
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'Azure subscription 1(d0fd2faf-9bc6-44b3-9ac1-311b375ed847)'
@@ -72,5 +68,5 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'azure-cicd-project'
         SlotName: 'production'
-        packageForLinux: '$(Build.ArtifactStagingDirectory)/*.zip'
+        packageForLinux: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
         AdditionalArguments: 
