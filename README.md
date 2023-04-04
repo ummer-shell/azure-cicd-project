@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Overview
 
 <TODO: complete this with an overview of your project>
@@ -49,3 +50,8 @@ Port: 443
 <TODO: Add link Screencast on YouTube>
 
 
+=======
+# azure-cicd-project
+[![Python application test with Github Actions](https://github.com/ummer-shell/azure-cicd-project/actions/workflows/pythonapp.yml/badge.svg)](https://github.com/ummer-shell/azure-cicd-project/actions/workflows/pythonapp.yml)
+Project: Building a CI/CD Pipeline as part of the Udacity Azure Devops course
+>>>>>>> 33b23f4df61c644fe5f776bac5b8b243447a99ac
