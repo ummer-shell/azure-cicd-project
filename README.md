@@ -86,7 +86,7 @@ The following pre-requisites are required:
     The resource group created should be available in the [Azure portal](https://portal.azure.com/) and visible as an Azure App Service:
     ![Azure App Service](./Screenshots/azure-app-service.PNG)
 
-    5. Test the running application by requesting prediction via the [make_predict_azure_app.sh](./make_predict_azure_app.sh) file. This runs a curl POST request to the `predict` route with sample parameter values.
+5. Test the running application by requesting prediction via the [make_predict_azure_app.sh](./make_predict_azure_app.sh) file. This runs a curl POST request to the `predict` route with sample parameter values.
     ```bash
     chmod +x ./make_predict_azure_app.sh
     ./make_predict_azure_app.sh
@@ -117,18 +117,18 @@ The following pre-requisites are required:
 
 8. Set-up a service connnection to the azure app service project via projet settings
 
-9. (Optional) If you are on the free tier of azure, you will need to set-up a Self-hosted pipeline agent. This can be done via the following tutorial
+9. (Optional) If you are on the free tier of azure, you will need to set-up a self-hosted pipeline agent. This can be done via the following tutorial
 https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/v2-windows?view=azure-devops 
 
 10. Navigate to pipelines in the azure devops project, and add a new pipeline. Provide permissions to connect to your github repository and select the [azure-pipelines-for-self-hosted-agent.yml](./azure-pipelines-for-self-hosted-agent.yml).
 
-11. Edit the file to with the required parameters as shown below:
+11. Edit the file with the required parameters that match your resource names as shown by the example below:
     ![Pipeline parameters](./Screenshots/azure-pipeline-parameters.PNG)
 
 12. Create the pipeline, and the build will commence. A successful implementation of the pipeline is below. This will run each time a change is committed to github:
     ![Azure buildjob success](./Screenshots/successful-run-buildjob.PNG)
 
-13. (Optional) The final stage is load testing the deployed application. Thhis was done via the [locust](https://docs.locust.io/en/stable/what-is-locust.html). The test was specified by the `locustfile.py` and can be run by the following command:
+13. (Optional) The final stage is load testing the deployed application. This was done via the [locust](https://docs.locust.io/en/stable/what-is-locust.html) library. The test was specified by the `locustfile.py` and can be run by the following command:
     ```bash
     # Run locust tests with 100 users and 5 sec in between request
     locust --host https://udacity-flask-cicd-project.azurewebsites.net/ --headless -u 100 -r 5
