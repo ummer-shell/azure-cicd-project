@@ -49,7 +49,7 @@ The following pre-requisites are required:
 - A Microsoft Azure Devops account
 
 ## Instructions
-*This is also available in video form in the Demo section. In addition, all commands used are available in the [commands.sh]() file*
+*This is also available in video form in the Demo section. In addition, all commands used are available in the [commands.sh](./commands.sh) file*
 
 1. Clone the repository in your preferred environment (and also push to your own account). In this demo, the Azure cloud shell is used: 
     ```bash
