@@ -20,9 +20,7 @@ As part of the project rubric, a fictional project plan was required and is avai
 - [Excel Spreadsheet](https://github.com/ummer-shell/azure-cicd-project/blob/main/project-plan.xlsx)
 
 
-## Instructions
-
- ### Architecture
+## Architecture
 The project architecture was split into two components, firstly a basic continuous integration (CI) with Github actions and secondly a full continouus delivery (CD) pipeline with Azure pipelines.
 
 The Github actions section runs the commands in the file [pythonapp.yml](./.github/workflows/pythonapp.yml) which installs dependencies, checks the python code lint and runs a basic test. The architecture is below:
@@ -41,6 +39,40 @@ A schematic diagram of the architecture is presented below:
 
 ![Azure Pipelines CD architecture](./Screenshots/azure-cd-architecture.PNG)
 Source: Udacity Lesson Material
+
+
+## Instructions
+*This is also available in video form in the Demo section. In addition, all commands used are available in the [commands.sh]() file*
+
+1. Clone the repository in your preferred environment. In this demo, the Azure cloud shell is used: 
+```bash
+git https://github.com/ummer-shell/azure-cicd-project.git
+cd azure-cicd-project
+```
+Example output:
+![Azure Pipelines CD architecture](./Screenshots/cloned-in-azure-cloud-shell.PNG)
+
+
+2. Test the code using the Makefile command:
+```bash 
+make all
+```
+Example output:
+![Passed tests from makefile](./Screenshots/passed-local-test-scaffold.PNG)
+
+2. Deploy in the application to the Azure App Service:
+```bash
+# Deploy web app (note: the name must be unique globally)
+az webapp up --name udacity-flask-cicd-project--resource-group azure-cicd-project
+```
+This runs at the following url: https://udacity-flask-cicd-project.azurewebsites.net/
+
+Example output from the web browser:
+![Running Application](./Screenshots/running-application.PNG)
+
+The resource group created should be available in the [Azure portal](https://portal.azure.com/) and visible as an Azure App Service:
+![Azure App Service](./Screenshots/azure-app-service.PNG)
+
 
 <TODO:  Instructions for running the Python project.  How could a user with no context run this project without asking you for any help.  Include screenshots with explicit steps to create that work. Be sure to at least include the following screenshots:
 
