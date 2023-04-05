@@ -2,14 +2,21 @@
 # Overview
 [![Python application test with Github Actions](https://github.com/ummer-shell/azure-cicd-project/actions/workflows/pythonapp.yml/badge.svg)](https://github.com/ummer-shell/azure-cicd-project/actions/workflows/pythonapp.yml)
 
-Project: Building a CI/CD Pipeline as part of the Udacity Azure Devops course
-<TODO: complete this with an overview of your project>
+Project: Building a CI/CD Pipeline as part of the Udacity Azure Devops course. 
+
+The base application is a house price predictor API for the Boston area  with as pre-trained `sklearn` model based on data from [Kaggle](https://www.kaggle.com/c/boston-housing). A prediction is made according to several features including average rooms, highway access, teacher-pupil ratios.
+
+The goal of this project is to create a pipeline that can automatically build, test and deploy the web app Azure. To do this, the following tools were leveraged:
+- Azure App Service
+- Azure Pipeline
+- Github Actions
+- Locust (load testing)
 
 ## Project Plan
-<TODO: Project Plan
+As part of the project rubric, a fictional project plan was required and is available below:
+- Trello Board
+- Excel Spreadsheet ()
 
-* A link to a Trello board for the project
-* A link to a spreadsheet that includes the original and final project plan>
 
 ## Instructions
 
