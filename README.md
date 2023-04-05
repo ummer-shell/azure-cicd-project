@@ -40,6 +40,13 @@ A schematic diagram of the architecture is presented below:
 ![Azure Pipelines CD architecture](./Screenshots/azure-cd-architecture.PNG)
 Source: Udacity Lesson Material
 
+## Pre-requisites
+The following pre-requisites are required:
+- Access to a command-line interface
+- Python environment
+- A Github account
+- A Microsoft Azure Account
+- A Microsoft Azure Devops account
 
 ## Instructions
 *This is also available in video form in the Demo section. In addition, all commands used are available in the [commands.sh]() file*
