@@ -44,7 +44,7 @@ Source: Udacity Lesson Material
 ## Instructions
 *This is also available in video form in the Demo section. In addition, all commands used are available in the [commands.sh]() file*
 
-1. Clone the repository in your preferred environment. In this demo, the Azure cloud shell is used: 
+1. Clone the repository in your preferred environment (and also push to your own account). In this demo, the Azure cloud shell is used: 
 ```bash
 git https://github.com/ummer-shell/azure-cicd-project.git
 cd azure-cicd-project
@@ -52,15 +52,21 @@ cd azure-cicd-project
 Example output:
 ![Azure Pipelines CD architecture](./Screenshots/cloned-in-azure-cloud-shell.PNG)
 
+2. Create a virtual environment:
+```bash
+python3 -m venv ~/.cicd_project
+source ~/.cicd_project/bin/activate
+```
 
-2. Test the code using the Makefile command:
+3. Test the code using the Makefile command:
 ```bash 
 make all
 ```
 Example output:
-![Passed tests from makefile](./Screenshots/passed-local-test-scaffold.PNG)
 
-2. Deploy in the application to the Azure App Service:
+![Passed tests from makefile](./Screenshots//makefile-tests.PNG)
+
+4. Deploy in the application to the Azure App Service:
 ```bash
 # Deploy web app (note: the name must be unique globally)
 az webapp up --name udacity-flask-cicd-project--resource-group azure-cicd-project
@@ -73,33 +79,61 @@ Example output from the web browser:
 The resource group created should be available in the [Azure portal](https://portal.azure.com/) and visible as an Azure App Service:
 ![Azure App Service](./Screenshots/azure-app-service.PNG)
 
-
-<TODO:  Instructions for running the Python project.  How could a user with no context run this project without asking you for any help.  Include screenshots with explicit steps to create that work. Be sure to at least include the following screenshots:
-
-* Project running on Azure App Service
-
-* Project cloned into Azure Cloud Shell
-
-* Passing tests that are displayed after running the `make all` command from the `Makefile`
-
-* Output of a test run
-
-* Successful deploy of the project in Azure Pipelines.  [Note the official documentation should be referred to and double checked as you setup CI/CD](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
-
-* Running Azure App Service from Azure Pipelines automatic deployment
-
-* Successful prediction from deployed flask app in Azure Cloud Shell.  [Use this file as a template for the deployed prediction](https://github.com/udacity/nd082-Azure-Cloud-DevOps-Starter-Code/blob/master/C2-AgileDevelopmentwithAzure/project/starter_files/flask-sklearn/make_predict_azure_app.sh).
-The output should look similar to this:
-
+5. Test the running application by requesting prediction via the [make_predict_azure_app.sh](./make_predict_azure_app.sh) file. This runs a curl POST request to the `predict` route with sample parameter values.
 ```bash
-udacity@Azure:~$ ./make_predict_azure_app.sh
+chmod +x ./make_predict_azure_app.sh
+./make_predict_azure_app.sh
+```
+Example output:
+```bash
 Port: 443
-{"prediction":[20.35373177134412]}
+{"prediction":[2.431574790057212]}
+```
+The application log is visible through through the following command:
+```bash
+az webapp log tail
 ```
 
-* Output of streamed log files from deployed application
+Example output:
 
-> 
+![Log stream](./Screenshots/log-stream.PNG)
+
+6. (Optional) Enable Github actions to set-up basic continuous integration:
+![Gitgub actions set-up](./Screenshots/github-actions-setup.PNG)
+Copy/Paste the code from [pythonapp.yml](./.github/workflows/pythonapp.yml).
+
+    Successful implementation will result in a page similar to the following under the actions tab:
+    ![Github-actions-pass](./Screenshots/github-action-pass.PNG)
+
+7. Set-up a devops project via the [Azure devops portal](https://dev.azure.com). Navigate to the page:
+![Devops project](./Screenshots/azure-devops-project.PNG)
+
+8. Set-up a service connnection to the azure app service project via projet settings
+
+9. (Optional) If you are on the free tier of azure, you will need to set-up a Self-hosted pipeline agent. This can be done via the following tutorial
+https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/v2-windows?view=azure-devops 
+
+10. Navigate to pipelines in the azure devops project, and add a new pipeline. Provide permissions to connect to your github repository and select the [azure-pipelines-for-self-hosted-agent.yml](./azure-pipelines-for-self-hosted-agent.yml).
+
+11. Edit the file to with the required parameters as shown below:
+![Pipeline parameters](./Screenshots/azure-pipeline-parameters.PNG)
+
+12. Create the pipeline, and the build will commence. A successful implementation of the pipeline is below. This will run each time a change is committed to github:
+![Azure buildjob success](./Screenshots/successful-run-buildjob.PNG)
+
+13. (Optional) The final stage is load testing the deployed application. Thhis was done via the [locust](https://docs.locust.io/en/stable/what-is-locust.html). The test was specified by the `locustfile.py` and can be run by the following command:
+```bash
+# Run locust tests with 100 users and 5 sec in between request
+locust --host https://udacity-flask-cicd-project.azurewebsites.net/ --headless -u 100 -r 5
+```
+
+Example output:
+![Locust test result](./Screenshots/locust-test-result.PNG)
+
+## Demo 
+
+[![Demo Video](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+
 
 ## Enhancements
 The following future enhancements could be implemented:
@@ -107,7 +141,3 @@ The following future enhancements could be implemented:
 - Load balancing
 - Additional locations
 - Historical prices and changes over time
-
-## Demo 
-
-[Demo Video](https://youtube.com)
