@@ -14,8 +14,8 @@ The goal of this project is to create a pipeline that can automatically build, t
 
 ## Project Plan
 As part of the project rubric, a fictional project plan was required and is available below:
-- Trello Board
-- Excel Spreadsheet ()
+- [Trello Board](https://trello.com/b/s2edAcH3/udacity-ci-cd-pipeline) (Note: this link will no longer be valid following successful project submission)
+- [Excel Spreadsheet](https://github.com/ummer-shell/azure-cicd-project/blob/main/project-plan.xlsx)
 
 
 ## Instructions
