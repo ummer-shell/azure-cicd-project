@@ -17,7 +17,8 @@ In line with these goals, the technical details and instructions below focus on 
 ## Project Plan
 As part of the project rubric, a fictional project plan was required and is available below:
 - [Trello Board](https://trello.com/b/s2edAcH3/udacity-ci-cd-pipeline) (Note: this link will no longer be valid following successful project submission)
-- [Excel Spreadsheet](https://github.com/ummer-shell/azure-cicd-project/blob/main/project-plan.xlsx)
+- [Excel Spreadsheet](https://github.com/ummer-shell/azure-cicd-project/blob/main/project-plan.xlsx) (Note: This may not open due to enterprise encryption, so a screenshot is provided below)
+![Azure App Service](./Screenshots/project-plan.PNG)
 
 
 ## Architecture
@@ -92,10 +93,8 @@ The following pre-requisites are required:
     ./make_predict_azure_app.sh
     ```
     Example output:
-    ```bash
-    Port: 443
-    {"prediction":[2.431574790057212]}
-    ```
+   ![Azure App Service](./Screenshots/cloud-shell-prediction.PNG)
+
     The application log is visible through through the following command:
     ```bash
     az webapp log tail
